@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evolutionary Connection 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0d0c0a;
+      --paper: #f5f0e8;
+      --paper-warm: #ede8dc;
+      --gold: #b8922a;
+      --gold-light: #d4a843;
+      --muted: #6b6357;
+      --rule: #c8bfb0;
+      --zh-bg: #eae4d7;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background-color: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      letter-spacing: 0.01em;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      position: sticky;
+      top: 0;
+      background: var(--paper);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo-sig {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      opacity: 0.9;
+    }
+
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+    }
+
+    /* ─── ARTICLE HEADER ─── */
+    .article-header {
+      padding: clamp(3rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4rem) 0;
+      max-width: 860px;
+      margin: 0 auto;
+      animation: fadeUp 0.5s ease backwards;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--gold);
+    }
+
+    .article-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+    }
+
+    .article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+
+    .article-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .article-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ─── OPENING EPIGRAPH ─── */
+    .epigraph {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem clamp(1.5rem, 5vw, 2rem) 0;
+      animation: fadeUp 0.5s ease backwards;
+      animation-delay: 0.1s;
+    }
+
+    .epigraph-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.6;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .epigraph-source {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-left: 1.4rem;
+    }
+
+    .epigraph-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin-top: 2.5rem;
+    }
+
+    /* ─── ARTICLE BODY ─── */
+    .article-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 2rem);
+      animation: fadeUp 0.55s ease backwards;
+      animation-delay: 0.15s;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─── BILINGUAL PARAGRAPH BLOCK ─── */
+    .para-block {
+      margin-bottom: 2.4rem;
+    }
+
+    .para-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-weight: 400;
+      line-height: 1.88;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .para-zh {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--muted);
+      background: var(--zh-bg);
+      border-left: 2px solid var(--rule);
+      padding: 0.7rem 1rem 0.7rem 1.1rem;
+      font-style: italic;
+    }
+
+    /* ─── PULL QUOTE ─── */
+    .pull-quote {
+      border-left: 2px solid var(--gold);
+      padding: 0.9rem 1.4rem;
+      margin: 2.5rem 0;
+      background: var(--paper-warm);
+    }
+
+    .pull-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ─── SECTION MARK ─── */
+    .section-mark {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      margin: 2.8rem 0 1.4rem;
+    }
+
+    /* ─── ORNAMENT ─── */
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 0.6rem;
+      margin: 2.5rem 0;
+      opacity: 0.5;
+    }
+
+    /* ─── P.S. NOTE ─── */
+    .ps-note {
+      background: var(--paper-warm);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 1.2rem 1.4rem;
+      margin: 2rem 0;
+    }
+
+    .ps-note p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .ps-note .ps-zh {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* ─── CLOSING QUOTE ─── */
+    .closing-quote {
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .closing-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.75;
+      margin-bottom: 0.6rem;
+    }
+
+    .closing-quote .zh {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    /* ─── ARTICLE FOOTER ─── */
+    .article-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 2rem) 4rem;
+    }
+
+    .article-footer-inner {
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .article-footer .sign {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    .article-footer .date-loc {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: right;
+    }
+
+    /* ─── SITE FOOTER ─── */
+    footer.site-footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer.site-footer .left {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    footer.site-footer .right {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a class="logo-sig" href="index.html">
+      <img class="logo-img" src="images/LY.jpg" alt="LY">
+      <span class="logo-name">Lynn Cai</span>
+    </a>
+    <nav>
+      <a href="index.html">Essays</a>
+      <a href="#">Philosophy</a>
+      <a href="#">Art</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <!-- ARTICLE HEADER -->
+  <div class="article-header">
+    <a class="back-link" href="index.html">← All Writings</a>
+    <p class="article-meta">Nov 6–10, 2024 &nbsp;·&nbsp; Philosophy &nbsp;·&nbsp; Essay</p>
+    <h1 class="article-title">Evolutionary Connection 1</h1>
+    <p class="article-subtitle">On Consciousness, Dopamine, and the Cognitive Revolution</p>
+    <hr class="article-rule">
+  </div>
+
+  <!-- EPIGRAPH -->
+  <div class="epigraph">
+    <p class="epigraph-text">"Species is not set, has not jelled, but is still in a state of becoming."</p>
+    <p class="epigraph-source">— John Steinbeck, <em>The Log from the Sea of Cortez</em></p>
+    <hr class="epigraph-rule">
+  </div>
+
+  <!-- ARTICLE BODY -->
+  <article class="article-body">
+
+    <div class="para-block">
+      <p class="para-en">I'm not here to talk about philosophy, I do not possess that clarity. But from the evolutionary
+        aspect, I want to align some ideas from <em>The Art of Focus</em> by Dan Koe with this article <em>The
+          Neuroscience of Happiness and Pleasure</em> that I'm reading today.</p>
+      <p class="para-zh">我并非要在这里谈论哲学——我没有那样的通透。但我想从进化的视角，将Dan Koe的《专注的艺术》与我今天正在阅读的文章《幸福与快乐的神经科学》中的一些观点对应起来。</p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">We're not jelled, we're craving for meanings; We're not set, we're facing our dread of death.
+        We possess consciousness, which is why we're not merely driven by the rewards of survival and procreation — we
+        feel the need to preserve our mental and conscious selves even more intensely than our physical existence. We
+        attempt to replicate our consciousness — or rather, our concepts of self — and we constantly predict and
+        anticipate the outcomes of our choices and actions based on conscious experience tied to evolutionary rewards.
+      </p>
+      <p class="para-zh">
+        我们尚未凝固，我们在渴望意义；我们尚未定型，我们正面对对死亡的恐惧。我们拥有意识，这便是我们不仅仅被生存与繁殖的奖励所驱动的原因——我们感受到保全精神与意识自我的迫切，甚至比保全肉体存在更为强烈。我们试图复制自己的意识——或者更准确地说，是对自我的概念——并基于与进化奖励相连的意识经验，不断预测与预期我们选择和行动的结果。
+      </p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">According to the article, Charles Darwin's pioneering idea suggests that the evolution of
+        emotions and affective expressions are adaptive responses to environmental situations, indicating the
+        evolutionary functions of both positive and negative affect.</p>
+      <p class="para-zh">根据该文章，达尔文的先驱性理论认为，情感与情绪表达的进化是对环境情境的适应性反应，揭示了正向与负向情感在进化中各自承担的功能。</p>
+    </div>
+
+    <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <p class="section-mark">The Dopamine Bush</p>
+
+    <div class="para-block">
+      <p class="para-en">One way to understand this is through the lens of the dopamine reward system: When a rabbit
+        sees a bush with ripe berries, and likewise when a lion sees that rabbit, their dopamine systems start to
+        activate and bring positive effects to the brain. Over time, evolution has created a strong connection between
+        food cues and rewards, leading animals to act more eagerly when they detect food.</p>
+      <p class="para-zh">
+        理解这一机制的一个视角是多巴胺奖励系统：当兔子看到一丛成熟的浆果，又如当狮子看到那只兔子，它们的多巴胺系统开始激活，为大脑带来积极的效应。随着时间推移，进化在食物线索与奖励之间建立了强烈的联结，使动物在探测到食物时行动更为积极。
+      </p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">This mechanism works for all mammals, including our species. However, as I mentioned before, we
+        possess that "tragic miracle of consciousness," which makes things drastically different. When our ancestors saw
+        a bush with berries, their dopamine system signaled the reward too; they felt activated and excited just like
+        that rabbit and that lion. But the crucial difference is that they experienced it in a conscious way, logging
+        the berries into their minds as a potential survival tool instead of just berries, and they began to invest
+        their attention in it. They started to make plans to consciously regulate these rewards and pleasures, using
+        that positive energy to visualize the future in order to have more rewards and to have a system to invest their
+        mental energy and attention. They framed their clarity of goals and solved the hierarchy of problems.</p>
+      <p class="para-zh">
+        这一机制适用于所有哺乳动物，包括我们人类。然而，正如我之前所说，我们拥有那"意识的悲剧性奇迹"，这使一切截然不同。当我们的祖先看到那丛浆果，他们的多巴胺系统同样发出奖励信号；他们和那只兔子、那头狮子一样兴奋激活。但关键的区别在于，他们以有意识的方式经历这一切——他们将浆果记入脑中，视之为潜在的生存工具，而非仅仅是浆果，并开始将注意力投入其中。他们着手制定计划，有意识地调配这些奖励与快感，用那股正向能量去构想未来，从而获得更多奖励，并建立一套投资心智能量与注意力的系统。他们厘清了目标的方向，并逐层解决问题的层级。
+      </p>
+    </div>
+
+    <div class="pull-quote">
+      <p>Just like evolution created a strong link between food cues and pleasure, positive affect can be linked with
+        experiences and thinking patterns through visualization — by focusing your positive energy toward a positive
+        outcome based on prior rewards and the systems you used to manage those rewards.</p>
+    </div>
+    <p class="para-zh"
+      style="border-left:2px solid var(--rule); padding:0.7rem 1rem 0.7rem 1.1rem; background:var(--zh-bg); font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--muted); line-height:1.9; margin-bottom:2.4rem;">
+      就像进化在食物线索与快感之间建立了强烈联结，正向情感同样可以通过可视化与经验和思维模式联结——将你的正向能量聚焦于基于先前奖励及管理奖励的系统所预期的积极结果之上。</p>
+
+    <div class="para-block">
+      <p class="para-en">Back to our ancestors standing next to that bush, they wonder: which choice and action is
+        better? To keep the berries and set a rabbit trap near the bush, or just collect all of the berries? Even if
+        collecting the berries is better, how many should I take? If I take too much, would it rot before my community
+        can consume it? But if I leave it in the bush, does that not mean I risk it being taken by another tribe, eaten
+        by the rabbit, or next time I come to the bush, there is a lion hiding inside and I become its prey? Or can I
+        replicate the berries in a beautiful, safe, and warm valley so I can have thousands of them next year?</p>
+      <p class="para-zh">
+        回到站在灌木丛旁的祖先，他们在思索：哪种选择和行动更好？是留下浆果、在灌木旁设置兔子陷阱，还是直接将浆果全部采走？就算采走更好，该采多少？如果取得太多，会不会在族人消耗之前腐烂？但若留在灌木上，是否意味着冒着被另一部落夺走、被兔子吃掉的风险，或者下次再来，灌木里藏着一头狮子，自己反而成了它的猎物？还是可以将浆果在一个美丽、安全而温暖的山谷里繁殖，明年便能拥有成千上万颗？
+      </p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">You see, it's about paying attention to the potential survival tools; consciously and mindfully
+        thinking, planning, and making predictions for your actions and choices; deriving value or utility from these;
+        and finally, creating the future landscape.</p>
+      <p class="para-zh">你看，这关乎于对潜在生存工具保持专注；有意识、审慎地思考、规划，并对自己的行动与选择作出预判；从中提取价值与效用；最终，构建未来的图景。</p>
+    </div>
+
+    <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <p class="section-mark">The Modern Crisis Horn</p>
+
+    <div class="para-block">
+      <p class="para-en">This is one of our evolutionary advantages: the human ability to consciously predict and
+        anticipate the outcome of our choices and actions — a double-edged sword of our nature. Our habit-loving brain
+        has already adapted this since the magical "Cognitive Revolution". So, when it comes to survival, we just love
+        to make plans and anticipate. But here come the problems, especially in modern society: physical survival is no
+        longer a huge problem for the vast majority of Earth's residents, and the material enjoyment most people
+        experience is much better than that of ancient gatherers. On the contrary, however, we can say that the mental
+        lives of modern generations is still living in the "crisis horn" of Africa, much more chaotic and dangerous than
+        the one our ancestors once resided in, where predators lurked everywhere, and Homo sapiens sapiens could only
+        survive through their creative intelligence.</p>
+      <p class="para-zh">
+        这是我们进化优势之一：人类有意识地预测与预期自身选择和行动结果的能力——我们天性中的一把双刃剑。自那神奇的"认知革命"以来，我们热爱习惯的大脑早已对此适应。于是，在涉及生存时，我们天生热衷于制定计划与预期。但问题随之而来，尤其在现代社会：对于绝大多数地球居民而言，物质生存已不再是巨大的难题，人们所享受的物质条件也远超古代采集者。然而与此相反，我们可以说，现代人的精神生活仍停留在非洲的"危机之角"，比祖先所在的那个时代更加混乱与危险——那时捕食者潜伏四处，智人唯有凭借创造性智慧方能存活。
+      </p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">Survival, under this context, is no longer in terms of solely collecting water and food to
+        maintain vital signs; but involves being financially capable of maintaining a certain quality of life, which has
+        a strong connection with your mental survival needs. That's why the survival tools people nowadays pay attention
+        to are those that bring them an income, allowing them to live a qualitative life and, at the same time, provide
+        them with cognitive value and utility.</p>
+      <p class="para-zh">
+        在这一语境下，生存已不再仅仅意味着采集水与食物以维持生命体征；而是涉及在经济上有能力维持一定生活质量，这与精神生存需求紧密相连。这就是为何如今人们所关注的"生存工具"，是那些能为他们带来收入的事物——既能让他们过上有质量的生活，同时又为其提供认知价值与效用。
+      </p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">We can't escape this habit of seeking potential "survival" tools. The need to sustain our
+        conscious selves makes us set goals, anticipate future rewards, and make plans, find the value, exactly like our
+        bush-ancestors did. But social entities and their default life paths come into people's vision far earlier in
+        life, before they even have a chance to think independently. As a result, they attach to these "bushes," setting
+        them as the ultimate goals of life and following that default path, paying most of their attention to it without
+        ever changing. Why? Because it is easy; it reduces the pain of facing uncertainty and the hard process of
+        finding the real tools that fit our genuine interests.</p>
+      <p class="para-zh">
+        我们无法逃脱这种寻求潜在"生存工具"的习性。维系意识自我的需求驱使我们设定目标、预期未来奖励、制定计划、寻找价值——与我们当年站在灌木旁的祖先别无二致。但社会实体与其预设的人生轨道在人们尚未有机会独立思考之前便已闯入视野。于是，他们依附于这些"灌木丛"，将其设定为人生终极目标，沿着那条默认的道路走下去，将大部分注意力投注其上，从未改变。为何如此？因为这太容易了；它减轻了直面不确定性的痛苦，也省去了寻找真正契合自身兴趣的工具那段艰难历程。
+      </p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">In the past, our ancestors had to face the uncertainty of nature. Nowadays, it seems you can
+        make choices and take action while only paying a small mental tax to the universe, as that promised future makes
+        the prediction and anticipation of your choices much easier to make — they become no-brainers. And you don't
+        even need to put in any endeavor to derive value and utility from those bushes, as it is already fixed by others
+        — stagnant and assembly-made, placed on grocery shelves waiting for you to take. The price is being paid by
+        allowing the fake, other-made conceptual 'self' to be implanted in your mind when you follow those default
+        paths; so you can continue enjoying those spoon-fed pleasures, consciously or unconsciously suppressing the real
+        opportunities around you for the next level of awareness, and indulge in your fragile fantasy of the future
+        landscape.</p>
+      <p class="para-zh">
+        过去，我们的祖先不得不直面自然的不确定性。而如今，你似乎只需向宇宙缴纳一点微薄的心智税，便能做出选择、付诸行动——那个被许诺的未来让你的预判与预期变得极其简单，成了无需动脑的事。你甚至不需要付出任何努力便能从那些灌木丛中提取价值与效用，因为一切早已由他人固定——停滞的、流水线式的，被摆上货架等你拿取。你所付出的代价，是当你沿着那些默认路径行进时，允许一个虚假的、由他人塑造的概念性"自我"被植入脑中；于是你得以继续享用那些被喂到嘴边的快感，有意或无意地压制着周遭那些通往更高意识层次的真实机遇，沉溺于对未来图景那脆弱的幻想之中。
+      </p>
+    </div>
+
+    <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <p class="section-mark">Entropy &amp; The Bubble</p>
+
+    <div class="para-block">
+      <p class="para-en">The natural, universal rule of entropy is permanent from the physical plane to the mental
+        plane: the future will never be certain. Entropy keeps increasing the chaos, and we must invest our efforts and
+        attention in our real lives to counteract it and find our balance. This mental system of misaligned goals,
+        certainty, and easy work is like a bubble that ought to be broken. Unfortunately, when it breaks, your
+        expectations will have already strayed too far from reality, and the gap between these two is where depression
+        comes in, creating a black hole that aims to drain every passion you have for this life, robbing you of the most
+        valuable gift given to humanity: the ability to appreciate the present.</p>
+      <p class="para-zh">
+        从物质层面到精神层面，熵的自然法则永恒不变：未来永远无法确定。熵持续增加着混沌，而我们必须将努力与注意力投入真实的生活，以抵抗它，寻得平衡。这套由错位目标、虚假确定性与安逸工作构成的心智系统，如同一个注定要破裂的泡沫。不幸的是，当它破裂时，你的期望早已与现实相距甚远，而这道裂缝，正是抑郁滋生之处——它制造出一个黑洞，意图吸干你对这段生命的一切热情，剥夺人类所被赋予的最珍贵礼物：感知当下的能力。
+      </p>
+    </div>
+
+    <div class="ps-note">
+      <p>P.S. Anyway, it's only a narrow cause-effect analysis, but evolutionary reasons are interesting to me, and
+        these problems truly exist.</p>
+      <p class="ps-zh para-zh" style="border-left:none; background:none; padding:0; margin-top:0.5rem;">P.S.
+        无论如何，这不过是一次狭隘的因果分析，但进化的原因令我着迷，而这些问题确实存在。</p>
+    </div>
+
+    <p class="section-mark">In Conclusion</p>
+
+    <div class="para-block">
+      <p class="para-en">It works like this: you feel the need to survive your conscious self. You do not want to be a
+        victim of mental entropy, so you need a system to invest your attention and mental energy. But in the third
+        millennium, a real potential survival tool for mental life is not like berries on a bush, just sitting there
+        waiting for someone to grab it; the future is always uncertain. A mental survival pattern can only be built when
+        you consciously gain knowledge and engage in trial and error in your own life — a self-experiment process, the
+        experiences, and the will to keep zooming out and continue expanding the "infinite masterpiece" of this game.
+        Then you can build a powerful link between your positive energy and your experience, along with ever-improving
+        thinking patterns, through visualization. In order to achieve this, you need radical open-mindedness instead of
+        a radical ideology; you need to stop labeling yourself. Also, you need to avoid any too-much-certainty goals
+        that lead to overimagination. You need to align expectations with reality, then act.</p>
+      <p class="para-zh">
+        它的运作方式是这样的：你感受到保全意识自我的迫切。你不愿成为心智熵的受害者，因此你需要一套投资注意力与心智能量的系统。然而在第三个千年里，精神生活真正的生存工具并不像灌木上的浆果，静静等在那里供人采摘；未来永远是不确定的。一套心智生存模式只能在你有意识地积累知识、在自己的生命中反复试错时逐渐建立——这是一个自我实验的过程，是经历的积累，是不断拉远视角、持续扩展这场游戏"无限杰作"的意志。如此，你便能通过可视化，在正向能量与经验之间，以及不断精进的思维模式之间，建立强大的联结。为此，你需要的是彻底的开放心态，而非激进的意识形态；你需要停止给自己贴标签。你也需要避免那些过度确定性的目标，它们只会导致过度幻想。你需要将期望与现实对齐，然后行动。
+      </p>
+    </div>
+
+    <div class="closing-quote">
+      <p>"Develop the brain to create thinking channels and knowledge systems. As the brain builds and structures a web
+        of thoughts and theories, the pain of existence simply disappears."</p>
+      <p class="zh">"发展大脑，建立思维通道与知识系统。当大脑编织并构建起思想与理论的网络，存在的痛苦便自然消散。"</p>
+    </div>
+
+  </article>
+
+  <!-- ARTICLE FOOTER -->
+  <div class="article-footer">
+    <div class="article-footer-inner">
+      <span class="sign">Lynn</span>
+      <div class="date-loc">
+        <div>August 1, 2023</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <p class="left">"We're not jelled — we're still in a state of becoming."</p>
+    <p class="right">© Lynn Cai &nbsp;·&nbsp; 2023—2025</p>
+  </footer>
+
+</body>
+
+</html>

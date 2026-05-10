@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>On Writers, Pain, and "The Self" — Lynn Cai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0d0c0a;
+      --paper: #f5f0e8;
+      --paper-warm: #ede8dc;
+      --gold: #b8922a;
+      --gold-light: #d4a843;
+      --muted: #6b6357;
+      --rule: #c8bfb0;
+      --zh-bg: #eae4d7;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background-color: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      letter-spacing: 0.01em;
+    }
+
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      position: sticky;
+      top: 0;
+      background: var(--paper);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo-sig {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      opacity: 0.9;
+    }
+
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+    }
+
+    .article-header {
+      padding: clamp(3rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4rem) 0;
+      max-width: 860px;
+      margin: 0 auto;
+      animation: fadeUp 0.5s ease backwards;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--gold);
+    }
+
+    .article-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+    }
+
+    .article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .article-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+    }
+
+    .epigraph {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem clamp(1.5rem, 5vw, 2rem) 0;
+      animation: fadeUp 0.5s ease backwards;
+      animation-delay: 0.08s;
+    }
+
+    .epigraph-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.65;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .epigraph-source {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-left: 1.4rem;
+    }
+
+    .epigraph-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin-top: 2.5rem;
+    }
+
+    .article-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 2rem);
+      animation: fadeUp 0.55s ease backwards;
+      animation-delay: 0.15s;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .para-block {
+      margin-bottom: 2.4rem;
+    }
+
+    .para-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-weight: 400;
+      line-height: 1.9;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .para-zh {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--muted);
+      background: var(--zh-bg);
+      border-left: 2px solid var(--rule);
+      padding: 0.7rem 1rem 0.7rem 1.1rem;
+      font-style: italic;
+    }
+
+    .pull-quote {
+      border-left: 2px solid var(--gold);
+      padding: 0.9rem 1.4rem;
+      margin: 2.5rem 0;
+      background: var(--paper-warm);
+    }
+
+    .pull-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 0.6rem;
+    }
+
+    .pull-quote .zh {
+      font-size: 1rem;
+    }
+
+    .section-mark {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      margin: 2.8rem 0 1.4rem;
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 0.6rem;
+      margin: 2.5rem 0;
+      opacity: 0.5;
+    }
+
+    .img-pair-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin: 2rem -1rem 6px;
+    }
+
+    .img-pair-top img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(10%) contrast(1.05);
+    }
+
+    .img-solo {
+      margin: 0 -1rem 2rem;
+    }
+
+    .img-solo img {
+      width: 100%;
+      display: block;
+      height: auto;
+      filter: sepia(10%) contrast(1.05);
+    }
+
+    .img-caption {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      font-family: 'Jost', sans-serif;
+    }
+
+    .article-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 2rem) 4rem;
+    }
+
+    .article-footer-inner {
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .article-footer .sign {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    .article-footer .date-loc {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: right;
+    }
+
+    footer.site-footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer.site-footer .left {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    footer.site-footer .right {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        display: none;
+      }
+
+      .img-pair-top {
+        grid-template-columns: 1fr;
+      }
+
+      .img-pair-top img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a class="logo-sig" href="index.html">
+      <img class="logo-img" src="LY.jpg" alt="LY">
+      <span class="logo-name">Lynn Cai</span>
+    </a>
+    <nav>
+      <a href="index.html">Essays</a>
+      <a href="#">Philosophy</a>
+      <a href="#">Art</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <div class="article-header">
+    <a class="back-link" href="index.html">← All Writings</a>
+    <p class="article-meta">Aug 9, 2023 &nbsp;·&nbsp; Literature &nbsp;·&nbsp; Bilingual</p>
+    <h1 class="article-title">On Writers, Pain,<br>and "The Self"</h1>
+    <p class="article-subtitle">2666 — 关于作家、痛苦与"我"</p>
+    <hr class="article-rule">
+  </div>
+
+  <div class="epigraph">
+    <p class="epigraph-text">"在令人厌倦的沙漠里有一片恐怖的绿洲。"<br>
+      <span style="font-size:0.9em; opacity:0.8;">"In the wearying desert, there is a terrifying oasis."</span>
+    </p>
+    <p class="epigraph-source">— Charles Baudelaire, <em>Les Fleurs du mal</em> &nbsp;·&nbsp; via Roberto Bolaño,
+      <em>2666</em>
+    </p>
+    <hr class="epigraph-rule">
+  </div>
+
+  <article class="article-body">
+
+    <div class="para-block">
+      <p class="para-en">A year has passed, I opened Bolaño again. At first it was just a few pages, four characters,
+        four sides of "me". It's the strong and perhaps angry stimulant of self-pity; it's the perseverance under the
+        cold eyes of the unwelcome; it's the lack of perseverance in the nihilism and confusion of the society that "If
+        volition is bound to social imperatives, as William James believed, and it's therefore easier to go to war than
+        it is to quit smoking."; it's the fear and ambivalence towards writing; it's the strength to return to the
+        reality of survival brought by the reinforcement of the value of not being able to be a writer. It is also a
+        banishment of extreme idealism for that two-year-long period of bone-scraping; it is also an asceticism to find
+        strength in nothingness.</p>
+      <p class="para-zh">
+        时隔一年，又翻开了波拉尼奥。最初不过寥寥的几页，四位人物，是四个关于"我"的侧面。是那种强烈的也许是愤怒般自我怜悯的兴奋剂；是在不受欢迎的冷眼下的坚持；是"戒烟比打仗更容易"的对社会的虚无主义与迷茫的毅力缺失；是对写作的一种恐惧与矛盾；是当不了作家这种价值观的强化带来的回归现实的生存力量；也是对那段长达两年的刮骨疗伤对极端理想主义的放逐；也是对在虚无中寻找力量的苦行。
+      </p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">I think my thoughts are powerful, even if people often fail to understand and categorize me as
+        a freak when I am entangled in them, associating such a shell with words like cowardice, incompetence, and
+        pathetic, and rejecting them with expulsion. This is somehow true, when I look at my face in the mirror, when I
+        laugh with people, it's so repugnant to what I am when I write and think that it's strange and obscure even to
+        me.</p>
+      <p class="para-zh">
+        我认为我的思想是有力的，哪怕在我被思考纠缠时人们往往无法理解与将我归类于怪胎的一类，将这样的躯壳与懦弱无能及可悲这些词联系附以驱逐的排斥。这是某种程度上的事实，当我看着镜子里的我、与人调笑时的面孔，是与写作与思考时我的一切相斥的，连我自己也感到陌生与晦涩。
+      </p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">People of all shapes and sizes appear in my world, sometimes they show disgust and affection
+        for me, but I always have the habit of seeing through those well-intentioned and fancy but weak expressions the
+        stubbornness and vulgarity of the driving force behind them — belonging to human nature, not to the individual.
+        I sometimes wonder why people use that kind of chemistry as the blood of their lives, but I also let it go. I
+        have no intention of shouting out the philosophy of my feelings, because I see the happiness, and the
+        inapplicability of my pure and powerful loneliness in this world. It is as if these few words will also be
+        reviled and feared. It is an expression and outpouring of emptiness.</p>
+      <p class="para-zh">
+        形形色色的人们出现在我的世界，有时他们对我表现出厌恶与喜爱，但我总是习惯性的透过那些好意又花哨但微弱的表达看到背后驱动力的顽劣与低俗——属于人性的，并不是属于个体的。我又时感叹为何人们将那样的化学反应作为赖以生存的血液，但也释怀，但又无意喊出我感悟的哲学，因为我看到了幸福，与我这纯粹又有力的孤独在这世道上的不适用。就好像这几句寥寥的文字也将受之唾弃与恐惧。是对虚空的表达与倾诉。
+      </p>
+    </div>
+
+    <div class="pull-quote">
+      <p>Thankfully, I am no longer afraid of anything that might be said about me. Because there is nothing I know more
+        about shaking and destroying my own mind than myself — this torture is officially over.</p>
+      <p class="zh">值得庆幸的是，现在我不再畏惧任何对我的看法。因为再没有事无能比我自己更懂得撼动与摧残自己的心灵——这段折磨正式的结束了。</p>
+    </div>
+
+    <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <p class="section-mark">On Literature & Writing</p>
+
+    <div class="para-block">
+      <p class="para-en">Literature, the painful proposition of my life, is the holy salvation. From letting books fill
+        that sensitive fear and lack of self-expression, to the joy of words being praised, to their deterioration and
+        reinvention, to now becoming a soft and devout confession. My writing is not for anyone, including myself.
+        Writing gives me peace, but for the rest of my life I hesitate and agonize over being a "writer," and I have no
+        recollection of the aesthetics of this self-mutilating madness. When I let myself be surrounded by utilitarian
+        and realizable ideals, the strength that this will gives me is what I aspire to.</p>
+      <p class="para-zh">
+        文学，是我生命中痛苦的命题，亦是圣洁的救赎。从让书本填满那份敏感的恐惧与缺失的自我表达，到文字被褒奖的欣喜与变质又推翻重造，再到现在成为一种柔声又虔诚的倾诉。我的文字不是写给任何人的，包括我自己。写作让我宁静，可在余下的时光我只对"作家"踌躇与痛苦，对这种自虐式的疯狂美学有些不存留念。当我任凭功利与可实现的理想将我包围，这种意志赋予我的强大是我向往的。
+      </p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">Like Baudelaire on the title page, "In the wearying desert, there is a terrifying oasis."</p>
+      <p class="para-zh">就像扉页的波德莱尔，"在令人厌倦的沙漠里有一片恐怖的绿洲。"</p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">But I will still think, I will read, I will write my own childish meditations from time to
+        time. Will hold on to this individuality in my own time, and perhaps I will, like Roberto, try to make an epic
+        poem mapping me at the age of 40.</p>
+      <p class="para-zh">但我仍然会思考，会阅读，会时不时的写我自己幼稚的沉思录。会在属于我自己的时间坚持这样的个性，也许我会像罗贝托，在40岁时尝试着作一部映射我的史诗。</p>
+    </div>
+
+    <div class="para-block">
+      <p class="para-en">Now I have made a relatively long-term decision, which is a reminder of the past and an apology
+        for the oasis. And thus a determined turn to try to conquer this vile and worthy desert.</p>
+      <p class="para-zh">现在我做出了一个相对长期的决定，这是对过去的留念，对绿洲的致歉。从而决然的转身试图征服这片卑劣又值得征服的沙漠。</p>
+    </div>
+
+    <!-- 2666 + Baudelaire side by side, note solo below at natural ratio -->
+    <div class="img-pair-top">
+      <div>
+        <img src="images/2666Novel.jpg" alt="2666 — Roberto Bolaño" style="object-position: center;">
+        <p class="img-caption">Roberto Bolaño · 2666</p>
+      </div>
+      <div>
+        <img src="Art/Portrait of Charles Baudelaire.jpg" alt="Portrait of Charles Baudelaire">
+        <p class="img-caption">Gustave Courbet · Portrait of Baudelaire · 1848</p>
+      </div>
+    </div>
+    <div class="img-solo">
+      <img src="images/note.jpg" alt="Handwritten note — Aug 9, 2023">
+      <p class="img-caption">Aug 9, 2023 — 2666</p>
+    </div>
+
+  </article>
+
+  <div class="article-footer">
+    <div class="article-footer-inner">
+      <span class="sign">Lynn</span>
+      <div class="date-loc">
+        <div>August 9, 2023</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p class="left">"在令人厌倦的沙漠里有一片恐怖的绿洲。"</p>
+    <p class="right">© Lynn Cai &nbsp;·&nbsp; 2023—2025</p>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Just Some Random Thoughts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0d0c0a;
+      --paper: #f5f0e8;
+      --paper-warm: #ede8dc;
+      --gold: #b8922a;
+      --gold-light: #d4a843;
+      --muted: #6b6357;
+      --rule: #c8bfb0;
+      --zh-bg: #eae4d7;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background-color: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      letter-spacing: 0.01em;
+    }
+
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      position: sticky;
+      top: 0;
+      background: var(--paper);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo-sig {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      opacity: 0.9;
+    }
+
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+    }
+
+    .article-header {
+      padding: clamp(3rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4rem) 0;
+      max-width: 860px;
+      margin: 0 auto;
+      animation: fadeUp 0.5s ease backwards;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--gold);
+    }
+
+    .article-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+    }
+
+    .article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .article-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+    }
+
+    .article-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 2rem);
+      animation: fadeUp 0.55s ease backwards;
+      animation-delay: 0.12s;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Journal entry block */
+    .entry {
+      margin-bottom: 3.5rem;
+    }
+
+    .entry-date {
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      font-family: 'Jost', sans-serif;
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .para-block {
+      margin-bottom: 2.2rem;
+    }
+
+    .para-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-weight: 400;
+      line-height: 1.9;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .pull-quote {
+      border-left: 2px solid var(--gold);
+      padding: 0.9rem 1.4rem;
+      margin: 2.5rem 0;
+      background: var(--paper-warm);
+    }
+
+    .pull-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 0.6rem;
+      margin: 2rem 0;
+      opacity: 0.5;
+    }
+
+    /* Fox Cry image floated */
+    .img-float-right {
+      float: right;
+      width: 200px;
+      margin: 0 0 1.2rem 1.8rem;
+    }
+
+    .img-float-right img {
+      width: 100%;
+      display: block;
+      filter: sepia(12%) contrast(1.05);
+    }
+
+    .img-float-right .img-caption {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      font-family: 'Jost', sans-serif;
+    }
+
+    .clearfix::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .img-caption {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      font-family: 'Jost', sans-serif;
+    }
+
+    /* Entry divider */
+    .entry-divider {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 3rem 0;
+    }
+
+    /* Final elegy */
+    .elegy {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2vw, 1.15rem);
+      font-weight: 400;
+      line-height: 2;
+      color: var(--ink);
+    }
+
+    .elegy em {
+      color: var(--muted);
+    }
+
+    .article-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 2rem) 4rem;
+    }
+
+    .article-footer-inner {
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .article-footer .sign {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    .article-footer .date-loc {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: right;
+    }
+
+    footer.site-footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer.site-footer .left {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    footer.site-footer .right {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        display: none;
+      }
+
+      .img-float-right {
+        float: none;
+        width: 100%;
+        margin: 0 0 1.2rem 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a class="logo-sig" href="index.html">
+      <img class="logo-img" src="images/LY.ico" alt="LY">
+      <span class="logo-name">Lynn Cai</span>
+    </a>
+    <nav>
+      <a href="index.html">Essays</a>
+      <a href="#">Philosophy</a>
+      <a href="#">Art</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <div class="article-header">
+    <a class="back-link" href="index.html">← All Writings</a>
+    <p class="article-meta">Oct – Nov 2024 &nbsp;·&nbsp; Journal</p>
+    <h1 class="article-title">Just Some Random Thoughts</h1>
+    <p class="article-subtitle">It's Just It Is, the World</p>
+    <hr class="article-rule">
+  </div>
+
+  <article class="article-body">
+
+    <!-- Entry 1 -->
+    <div class="entry">
+      <p class="entry-date">October 30, 2024</p>
+
+      <div class="para-block">
+        <p class="para-en">I feel lonely right now, probably because I only slept maybe 2h last night, triggered the
+          fire alarm and so a little bit neurasthenia? People don't really talk with me, it's just a superficial kindly
+          conversation and relationship: they don't hate me and their upbringing makes them talk with me in a polite
+          way.</p>
+      </div>
+
+      <div class="para-block">
+        <p class="para-en">But I guess I also feel like I don't really need to have a real friendship, relationship and
+          so on. That would be a gift, if it happens to my life, even though it would bring me a sense of insecurity —
+          because I know if someone truly entered my heart, losing them would probably kill me. I don't really think I
+          have had a real friend so far in all periods of my life.</p>
+      </div>
+
+      <div class="para-block">
+        <p class="para-en">But I think now I feel fulfilling with my focus on myself. For now, I just don't depend
+          emotionally on others and don't need a relationship for self-worth. Honestly, I don't even miss my family that
+          much. It sounds cold, but I just want to focus on meaningful goals — my creations, growth, strength, and
+          power.</p>
+      </div>
+
+      <div class="para-block">
+        <p class="para-en">I once shared a quote on social media from a great writer (I forget the name) who said that
+          when we abstractly love humanity, we're actually trying to love ourselves. I tear up at masterpieces created
+          by humankind. The Civilization. I love our species, I value my intelligence, and that's what I truly
+          appreciate about life. I just love to be the glitch, the deviation in this human-made Matrix.</p>
+      </div>
+
+      <div class="pull-quote">
+        <p>So who is the weirdo in the corner today? What are they paying attention to? What is fringey?</p>
+      </div>
+    </div>
+
+    <hr class="entry-divider">
+
+    <!-- Entry 2 -->
+    <div class="entry">
+      <p class="entry-date">November 11, 2024</p>
+
+      <div class="clearfix">
+        <div class="img-float-right">
+          <img src="images/foxCryReview2015.jpg" alt="Fox Cry Review 2015">
+          <p class="img-caption">Fox Cry Review · 2015</p>
+        </div>
+
+        <div class="para-block">
+          <p class="para-en">I saw those pamphlets today, it named <em>Fox Cry Review</em>, I took one of them, and on
+            the cover were two ceramic swans soaking unattended in a pool. The colors on them had long since blurred,
+            and their once beautiful white feathers were covered in stains and limescale. It's a booklet that was
+            printed and edited nine years ago.</p>
+        </div>
+
+        <div class="para-block">
+          <p class="para-en">It still looks as good as new when you turn it over, but in six months' time it and the
+            other years' compilations would be as dormant as this small campus that was about to be shut down, and I
+            didn't want to see them discarded in a landfill, but even if I, or anyone else, took it away and remembered
+            it, or if my overly idealistic idea of re-editing another Fox Cry Review after nine years became a reality —
+            which is unlikely — what could any of this change? Its editors, the creators of the included works might
+            remember them at some sporadic times, and I wonder where these creators are now. This volume is so new and
+            light, yet the curse of oblivion is so heavy and lingering.</p>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        <p>Ideals are peaceful, history is violent.</p>
+      </div>
+    </div>
+
+    <hr class="entry-divider">
+
+    <!-- Entry 3 -->
+    <div class="entry">
+      <p class="entry-date">November 19, 2024</p>
+
+      <div class="elegy">
+        <p>Lives are so fragile. I guess there's no meaning, only sparks of beautiful moments and peace. Reside your
+          heart in the void and the present; it's the time you're looking at the sky at night and wondering where the
+          truth lies. Feel no pain, yet no happiness. You stand there as it is — you are the creation of this universe,
+          and the only absolute is this cycle of destruction and reunion. So I think we all come back together after it
+          all. We unite, we evolve, we cross time and space — by love, in dignity. May those who forever sleep in the
+          fire rest in their peace.</p>
+        <br>
+        <p><em>Grandma, I miss you so much, but now I'm not afraid of death anymore. I know we will return to each other
+            again, no matter when or in which form. I'm sorry, I love you forever, and I have already grown into the
+            person who has the courage to face my love and my heart.</em></p>
+      </div>
+    </div>
+
+  </article>
+
+  <div class="article-footer">
+    <div class="article-footer-inner">
+      <span class="sign">Lynn</span>
+      <div class="date-loc">
+        <div>Oct — Nov 2024</div>
+        <div style="margin-top:2px;">Wisconsin</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p class="left">"Ideals are peaceful, history is violent."</p>
+    <p class="right">© Lynn Cai &nbsp;·&nbsp; 2023—2025</p>
+  </footer>
+
+</body>
+
+</html>

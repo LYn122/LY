@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LY — Here, I Create</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Jost:wght@200;300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0d0c0a;
+      --paper: #f5f0e8;
+      --paper-warm: #ede8dc;
+      --gold: #b8922a;
+      --gold-light: #d4a843;
+      --muted: #6b6357;
+      --rule: #c8bfb0;
+      --card-bg: #f0ebe0;
+      --hover-bg: #e8e2d4;
+      --accent: #2a3b5a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background-color: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      letter-spacing: 0.01em;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      position: sticky;
+      top: 0;
+      background: var(--paper);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo-sig {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      opacity: 0.9;
+    }
+
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+    }
+
+    .hero-left {}
+
+    .hero-issue {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .hero-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 36ch;
+      border-left: 1px solid var(--gold);
+      padding-left: 1.2rem;
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+
+    .hero-featured-img {
+      width: 100%;
+      max-width: 450px;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      filter: sepia(15%) contrast(1.05);
+    }
+
+    .hero-featured-caption {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-label span {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ─── GRID ─── */
+    .articles-grid {
+      padding: 0 clamp(1rem, 4vw, 3rem);
+      padding-bottom: 4rem;
+    }
+
+    .grid-row {
+      display: grid;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .grid-row-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-row-2 {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .grid-row-2-inv {
+      grid-template-columns: 1fr 2fr;
+    }
+
+    .grid-row-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .article-card {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--rule);
+      cursor: pointer;
+      transition: background 0.25s;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-card:last-child {
+      border-right: none;
+    }
+
+    .article-card:hover {
+      background: var(--hover-bg);
+    }
+
+    .article-card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .card-cover {
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      filter: grayscale(20%) sepia(10%) contrast(1.05);
+      transition: filter 0.4s;
+      display: block;
+    }
+
+    .article-card:hover .card-cover {
+      filter: grayscale(0%) sepia(5%) contrast(1.08);
+    }
+
+    .card-cover-tall {
+      aspect-ratio: 2/3;
+    }
+
+    .card-cover-wide {
+      aspect-ratio: 16/7;
+    }
+
+    .card-meta {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    .card-title-lg {
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    }
+
+    .card-excerpt {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-arrow {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.2rem;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: all 0.25s;
+    }
+
+    /* featured card */
+    .card-featured {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .card-featured:hover {
+      background: #1a1815;
+    }
+
+    .card-featured .card-title {
+      color: var(--paper);
+    }
+
+    .card-featured .card-excerpt {
+      color: #9a9288;
+    }
+
+    .card-featured .card-arrow {
+      color: var(--gold-light);
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee-bar {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      overflow: hidden;
+      padding: 0.6rem 0;
+      background: var(--paper-warm);
+    }
+
+    .marquee-inner {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 28s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-inner span {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      font-weight: 400;
+    }
+
+    .marquee-inner .dot {
+      color: var(--gold);
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-left {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .footer-right {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-right {
+        align-items: flex-start;
+      }
+
+      .hero-featured-img {
+        max-width: 100%;
+      }
+
+      .grid-row-3,
+      .grid-row-2,
+      .grid-row-2-inv,
+      .grid-row-4 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        display: none;
+      }
+
+      .grid-row-3,
+      .grid-row-2,
+      .grid-row-2-inv,
+      .grid-row-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .article-card {
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .article-card:last-child {
+        border-bottom: none;
+      }
+
+      .hero-title {
+        font-size: 3.2rem;
+      }
+    }
+
+    /* ─── FADE IN ─── */
+    .article-card {
+      animation: fadeUp 0.5s ease backwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .grid-row:nth-child(1) .article-card:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .grid-row:nth-child(1) .article-card:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .grid-row:nth-child(1) .article-card:nth-child(3) {
+      animation-delay: 0.19s;
+    }
+
+    .grid-row:nth-child(2) .article-card:nth-child(1) {
+      animation-delay: 0.26s;
+    }
+
+    .grid-row:nth-child(2) .article-card:nth-child(2) {
+      animation-delay: 0.33s;
+    }
+
+    .grid-row:nth-child(3) .article-card:nth-child(1) {
+      animation-delay: 0.4s;
+    }
+
+    .grid-row:nth-child(3) .article-card:nth-child(2) {
+      animation-delay: 0.47s;
+    }
+
+    .grid-row:nth-child(3) .article-card:nth-child(3) {
+      animation-delay: 0.54s;
+    }
+
+    .grid-row:nth-child(3) .article-card:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a class="logo-sig" href="index.html">
+      <img class="logo-img" src="images/LY.ico" alt="LY">
+      <span class="logo-name">Lynn CAI</span>
+    </a>
+    <nav>
+      <a href="#">Essays</a>
+      <a href="#">Philosophy</a>
+      <a href="#">Art</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-issue">A Personal Journal &nbsp;·&nbsp; 2023—2025</p>
+      <h1 class="hero-title">Here,<br><em>I Create</em></h1>
+      <p class="hero-desc">
+        Writing between two languages, two continents — literature, consciousness, solitude, and the world.
+      </p>
+    </div>
+    <div class="hero-right">
+      <img class="hero-featured-img" src="Art/Arnold_Böcklin_-_Die_Toteninsel_III_(Alte_Nationalgalerie,_Berlin).jpg"
+        alt="Isle of the Dead">
+      <p class="hero-featured-caption">Isle of the Dead, Arnold Böcklin</p>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar" aria-hidden="true">
+    <div class="marquee-inner">
+      <span>Bolaño</span><span class="dot">✦</span>
+      <span>Baudelaire</span><span class="dot">✦</span>
+      <span>Consciousness</span><span class="dot">✦</span>
+      <span>神性</span><span class="dot">✦</span>
+      <span>Literature</span><span class="dot">✦</span>
+      <span>In A Time Lapse</span><span class="dot">✦</span>
+      <span>The Self</span><span class="dot">✦</span>
+      <span>Entropy</span><span class="dot">✦</span>
+      <span>AIC</span><span class="dot">✦</span>
+      <span>Nighthawks</span><span class="dot">✦</span>
+      <span>Dopamine</span><span class="dot">✦</span>
+      <span>佛的游戏</span><span class="dot">✦</span>
+      <!-- duplicate for seamless loop -->
+      <span>Bolaño</span><span class="dot">✦</span>
+      <span>Baudelaire</span><span class="dot">✦</span>
+      <span>Consciousness</span><span class="dot">✦</span>
+      <span>神性</span><span class="dot">✦</span>
+      <span>Literature</span><span class="dot">✦</span>
+      <span>In A Time Lapse</span><span class="dot">✦</span>
+      <span>The Self</span><span class="dot">✦</span>
+      <span>Entropy</span><span class="dot">✦</span>
+      <span>AIC</span><span class="dot">✦</span>
+      <span>Nighthawks</span><span class="dot">✦</span>
+      <span>Dopamine</span><span class="dot">✦</span>
+      <span>佛的游戏</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- SECTION LABEL -->
+  <div class="section-label">
+    <span>Selected Writings</span>
+  </div>
+
+  <!-- ARTICLES GRID -->
+  <main class="articles-grid">
+
+    <!-- Row 1: 3 columns -->
+    <div class="grid-row grid-row-3">
+
+      <a class="article-card card-featured" href="article7.html">
+        <img class="card-cover" src="images/chicago.jpg" alt="Chicago Freestyle">
+        <p class="card-meta">Dec 2025 &nbsp;·&nbsp; Essay</p>
+        <h2 class="card-title card-title-lg">Chicago Freestyle<br><span
+            style="font-style:italic;font-weight:300;">风城随笔</span></h2>
+        <p class="card-excerpt">AIC, Nighthawks, Palmer House — and the back of one's own solitary silhouette in the
+          white restaurant light.</p>
+        <span class="card-arrow">→</span>
+      </a>
+
+      <a class="article-card" href="article6.html">
+        <img class="card-cover" src="images/wukong.webp" alt="Collection 2025">
+        <p class="card-meta">2025 &nbsp;·&nbsp; essay</p>
+        <h2 class="card-title">关于欲望, 关于花哨, 关于“放荡形骸”的外相<br></h2>
+        <p class="card-excerpt">On desire, ornamentation, and the outer appearance of 'licentiousness' — and what the
+          Diamond Sutra has to say about all of it.</p>
+        <span class="card-arrow">→</span>
+      </a>
+
+      <a class="article-card" href="article5.html">
+        <img class="card-cover" src="Art/Billich-HomagetoDali-Master-33x33w36x36border.webp"
+          alt="Evolutionary Connection">
+        <p class="card-meta">Nov 2024 &nbsp;·&nbsp; Philosophy</p>
+        <h2 class="card-title">Evolutionary Connection 1</h2>
+        <p class="card-excerpt">Steinbeck, dopamine, and the bush of berries — consciousness as the tragic miracle that
+          separates us from rabbits and lions.</p>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Row 2: 2-col wide/narrow -->
+    <div class="grid-row grid-row-2">
+
+      <a class="article-card" href="article4.html">
+        <img class="card-cover card-cover-wide" src="images/jazz.jpg" alt="Random Thoughts">
+        <p class="card-meta">Oct – Nov 2024 &nbsp;·&nbsp; Journal</p>
+        <h2 class="card-title card-title-lg">Just Some Random Thoughts</h2>
+        <p class="card-excerpt">Loneliness, Fox Cry Review, my dear grandmother, and what it means to reside your heart
+          in the
+          void and the present.</p>
+        <span class="card-arrow">→</span>
+      </a>
+
+      <a class="article-card" href="article3.html">
+        <img class="card-cover" src="Art/Jozef_Rapacki_-_Zaduma_1892.jpg" alt="Autumn Day">
+        <p class="card-meta">Oct 2024 &nbsp;·&nbsp; Reflection</p>
+        <h2 class="card-title">Reflections on an Autumn Day</h2>
+        <p class="card-excerpt">Bruno Schulz, Ludovico Einaudi, the gas station glow — and how humans possess an
+          incomparable divinity.</p>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Row 3: 4 columns -->
+    <div class="grid-row grid-row-4">
+
+      <a class="article-card" href="myFirstPage.html">
+        <img class="card-cover" src="images/JPG.jpg" alt="first_page">
+        <p class="card-meta">2024 &nbsp;·&nbsp; Introduction</p>
+        <h2 class="card-title">Who's Lynn?</h2>
+        <p class="card-excerpt">The first page I created.</p>
+        <span class="card-arrow">→</span>
+      </a>
+
+      <a class="article-card" href="article2.html">
+        <img class="card-cover" src="Art/Carl Spitzweg - Der arme Poet (Neue Pinakothek).jpg" alt="Detoxification">
+        <p class="card-meta">Aug 2023 &nbsp;·&nbsp; Journal</p>
+        <h2 class="card-title">Detoxification Program</h2>
+        <p class="card-excerpt">Build thinking channels. Every organism needs to excrete. The day I became a legal
+          adult, boarding a plane to Paris.</p>
+        <span class="card-arrow">→</span>
+      </a>
+
+      <a class="article-card" href="article1.html">
+        <img class="card-cover" src="Art/Sascha_Schneider_-_Der_Chodem.jpg" alt="Writers Pain Self">
+        <p class="card-meta">Aug 2023 &nbsp;·&nbsp; Literature</p>
+        <h2 class="card-title">On Writers, Pain, and "The Self"</h2>
+        <p class="card-excerpt">In the wearying desert, there is a terrifying oasis. On Bolaño, self-pity, and the
+          bone-scraping banishment of extreme idealism.</p>
+        <span class="card-arrow">→</span>
+      </a>
+
+      <a class="article-card" style="justify-content: flex-end; background: var(--paper-warm);" href="#">
+        <div
+          style="font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:300; line-height:1; color:var(--rule); margin-bottom:auto;">
+          ✦</div>
+        <p
+          style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; color:var(--muted); line-height:1.6;">
+          "In the wearying desert, there is a terrifying oasis."
+        </p>
+        <p
+          style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-top:0.5rem;">
+          — Baudelaire</p>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-left">"We think, therefore we are."</p>
+    <p class="footer-right">© Lynn Cai &nbsp;·&nbsp; 2023—2025</p>
+  </footer>
+
+</body>
+
+</html>
